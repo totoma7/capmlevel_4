@@ -7,7 +7,10 @@
   "dependencies": {
     "@sap/cds": "^3.18.4",
     "express": "^4.17.1",
-    "hdb": "^0.17.1"
+    "hdb": "^0.17.1",
+    "jest": "^24.9.0",
+    "sqlite3": "^4.1.1",
+    "supertest": "^4.0.2"
   },
   "engines": {
     "node": "^8.9"
@@ -15,18 +18,19 @@
   "scripts": {
     "build": "cds build/all --clean",
     "deploy": "cds deploy",
-    "start": "cds run"
+    "start": "cds run",
+    "test": "jest",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "cds": {
     "requires": {
-      "db": {
-        "[production]": {
-          "kind": "hana",
-          "model": [
-            "db",
-            "srv"
-          ]
-        }
+      "[production]": {
+        "kind": "hana",
+        "model": [
+          "db/",
+          "srv/",
+          "app/"
+        ]
       }
     }
   }
